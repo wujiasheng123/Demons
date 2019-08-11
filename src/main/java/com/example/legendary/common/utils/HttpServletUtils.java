@@ -32,7 +32,7 @@ public class HttpServletUtils {
         long userId = JwtUtil.getId(token);
         //将token放入Redis中并设置超时时间
         redisUtil.set("PREFIX_USER_TOKEN" + userId,token,JwtUtil.EXPIRE_TIME);
-        httpServletResponse.setHeader("Authorization",token);
+        httpServletResponse.setHeader("token",token);
         httpServletResponse.setHeader("Access-Control-Expose-Headers", "token");
     }
 
@@ -42,7 +42,7 @@ public class HttpServletUtils {
      * @return token
      */
     public String getHeader(HttpServletRequest httpServletRequest){
-        return httpServletRequest.getHeader("Authorization");
+        return httpServletRequest.getHeader("token");
     }
 
     /**

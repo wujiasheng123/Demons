@@ -45,7 +45,7 @@ public class UsersController {
     }
 
     @PostMapping("/test")
-    @ApiOperation("/测试jpa")
+    @ApiOperation("/测试jpa是否有效")
     public Object test(){
         userService.add("rrrr","123456");
         return 1;

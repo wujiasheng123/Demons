@@ -1,0 +1,4 @@
+spring:
+  profiles:
+    #MySQL数据库使用prod，MariaDB使用dev
+    active: dev

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--配置关闭缓存-->
+        <!--一级缓存-->
+        <setting name="localCacheScope" value="SESSION"/>
+        <!-- 全局映射器启用缓存 -->
+        <setting name="cacheEnabled" value="false"/>
+        <!-- 查询时,关闭关联对象及时加载以提高性能 -->
+        <setting name="lazyLoadingEnabled" value="false" />
+        <!-- 设置关联对象加载的形态,此处为按需加载字段(加载字段由SQL指定),不会加载关联表的所有字段,以提高性能 -->
+        <setting name="aggressiveLazyLoading" value="false" />
+        <!-- 对于位置的SQL查询,允许返回不同的结果集以达到通用的效果 -->
+        <setting name="multipleResultSetsEnabled" value="true" />
+        <!-- 允许使用列标签代替列明 -->
+        <setting name="useColumnLabel" value="true" />
+        <!-- 给予被嵌套的resultMap以字段-属性的映射支持 -->
+        <setting name="autoMappingBehavior" value="PARTIAL" />
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <setting name="useGeneratedKeys" value="true" />
+        <!-- 对于批量更新操作缓存SQL以提高性能 -->
+        <setting name="defaultExecutorType" value="REUSE"/>
+        <!--事务超时时间 MariaDB使用-->
+        <setting name="defaultStatementTimeout" value="2592000" />
+        <!--事务超时时间 MySQL使用-->
+        <!--<setting name="defaultStatementTimeout" value="25000"/>-->
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+
+    <!--别名-->
+    <typeAliases>
+        <typeAlias type="java.lang.Integer" alias="int" />
+        <typeAlias type="java.lang.String" alias="string" />
+        <typeAlias type="java.lang.Long" alias="long" />
+        <typeAlias type="java.lang.Byte" alias="byte" />
+        <typeAlias type="java.lang.Double" alias="double" />
+    </typeAliases>
+</configuration>

@@ -1,0 +1,133 @@
+server:
+  port: 8888
+  undertow:
+    accesslog:
+      # 是否启动日志
+      enabled: true
+      # 日志文件名后缀
+      suffix: log
+      # 日志文件名前缀
+      prefix: undertow
+      dir: /var/opt/logs/
+    # HTTP POST请求最大的大小
+    max-http-post-size: 100
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+    io-threads: 100
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+    worker-threads: 128
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 1024
+    # 是否分配的直接内存
+    direct-buffers: true
+spring:
+  #服务器外挂地址
+  resources:
+    # linux系统使用方式
+#    static-locations: file:///var/opt/upload
+    # Windows系统下使用方式
+    static-locations: file:E:\var
+  datasource:
+    #使用数据库连接池
+    driver-class-name: org.mariadb.jdbc.Driver
+    #数据库路径
+    url: jdbc:mariadb://47.101.34.163:3306/fm?autoReconnect=true&characterEncoding=UTF-8
+    #数据库账号
+    username: root
+    #数据库密码
+    password: root
+    sql-script-encoding: utf-8
+##    #连接池的配置信息
+    hikari:
+      connection-timeout: 30000
+      maxLifetime: 20000
+      maximum-pool-size: 4000
+      minimum-idle: 10
+      validation-timeout: 300
+      login-timeout: 1000
+      idle-timeout: 30000
+      auto-commit: true
+      connection-test-query: SELECT 1
+      pool-name: HikariPool
+      username: root
+      password: root
+      jdbc-url: jdbc:mariadb://47.101.34.163:3306/fm?autoReconnect=true&characterEncoding=UTF-8
+      driver-class-name: org.mariadb.jdbc.Driver
+  #redis 配置
+  redis:
+    database: 0
+    #redisz主机名
+    host: 127.0.0.1
+    #端口号
+    port: 6379
+    #密码
+    password:
+    lettuce:
+      pool:
+        #连接池中最大连接数
+        max-active: 100
+        #连接池中最大阻塞等待时间（负值表示没有限制）
+        max-wait: 100ms
+        #连接池中最大空闲连接
+        max-idle: 100
+        #连接池中最小空闲连接
+        min-idle: 50
+        # 关闭超时时间
+      shutdown-timeout: 100ms
+    #连接超时时间
+    timeout: 1000ms
+  jackson:
+    #返回时间戳
+    #如果三行同时存在 以时间戳返回为主
+    serialization:
+      write-dates-as-timestamps:
+        true
+    #日期返回的格式可开启或者关闭
+    #    date-format: yyyy-MM-dd HH:mm:ss
+    #时间差可开启或者关闭
+#    time-zone: GMT+8
+#jpa
+  jpa:
+    database: mysql
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  devtools:
+    restart:
+      enabled: true
+  session:
+    store-type: redis
+#mybatis
+mybatis:
+  config-location: classpath:/mybatis/mybatis-config.xml
+  mapper-locations: classpath:/mapper/*/*.xml
+
+pagehelper:
+  offset-as-page-num: true
+  row-bounds-with-count: true
+  reasonable: true
+  helper-dialect: mysql
+  params: count=countSql
+  support-methods-arguments: true
+#暴露health
+#management:
+#  endpoint:
+#    health:
+#      show-details: always
+#  endpoints:
+#    web:
+#      exposure:
+#        include: health,info,env,metrics
+logging:
+  file:
+    #上传文件最大的值
+    max-size: 100MB
+  pattern:
+    #时间
+    dateformat: yyyy-MM-dd HH:mm:ss:SSS
+  #日志输出地址
+  path: /var/opt/logs/

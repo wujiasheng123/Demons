@@ -26,14 +26,14 @@ public class ALiYumOSSUpload {
         List<String> list = new ArrayList<>();
         // 阿里云终端节点地址
         // Endpoint以杭州为例，其它Region请按实际情况填写。
-        String endpoint = "http://oss-cn-beijing.aliyuncs.com";
+        String endpoint = "";
         // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。
         // 阿里云accessKeyId，根据本身进行修改。
-        String accessKeyId = "LTAIG0MUpzbDxCiV";
+        String accessKeyId = "";
         // 阿里云accessKeySecret，根据本身进行修改。
-        String accessKeySecret = "kAt0mzRoBah4q6ToENcrMSl87NHuEk";
+        String accessKeySecret = "";
         // bucket由自己在阿里云设置，根据本身进行修改。
-        String bucketName = "wujiasheng";
+        String bucketName = "";
         for (MultipartFile anUploadFile : uploadFile) {
             //文件是否存在
             if (anUploadFile.isEmpty()) {
